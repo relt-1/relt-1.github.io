@@ -373,6 +373,15 @@
         </td>
     </tr>
     </table>
+    <input id="customicon" type="text" value="" placeholder="custom url here like https://i.imgur.com/cUoeEc0.png" style="width:500px">
+    <div class="wrapper" style="width:128px;height:128px;margin-left:auto;margin-right:auto;">
+        <div class="content">
+            <img id="customiconimg" src="">
+        </div>
+        <div class="background">
+            <input type="radio" id="customiconradio" name="icon" value="">
+        </div>
+    </div>
     </form>
     <p>button 1:</p>
     <input id="button1" type="text" value="OK"> <input id="button1style" type="number" value="0" min="0" max="4"> <input id="button1default" type="checkbox">
@@ -417,7 +426,10 @@ async def imageopenGETBYTES(text):
     text = text.replace("\\","/")
     text = text.replace("//","/")
     text = text.replace("./","")
-    url = f"https://raw.githubusercontent.com/relt-1/WindowCreator/main/{text}"
+    if( not text.startswith("http") ):
+        url = f"https://raw.githubusercontent.com/relt-1/WindowCreator/main/{text}"
+    else:
+        url = text
     response = await pyfetch(url)
     if response.status == 200:
         return await response.bytes()
@@ -1650,8 +1662,17 @@ async def UpdateImage(e):
         UpdateImage7TaskDialog()
     )
 
+def UpdateCustomIcon(e=None):
+    url = document.getElementById("customicon").value
+    document.getElementById("customiconimg").src = url
+    document.getElementById("customiconradio").value = url
+    
 Update = create_proxy(UpdateImage)
 document.getElementById("generate").addEventListener("click",Update)
+
+UpdateIcon = create_proxy(UpdateCustomIcon)
+document.getElementById("customicon").addEventListener("change",UpdateIcon)
+UpdateCustomIcon()
 </py-script>
 	
 	</body>
