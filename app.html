@@ -421,7 +421,7 @@ from numpy import *
 from PIL import Image, ImageFont, ImageDraw, ImageMath,ImageChops, ImageOps
 from math import ceil,floor
 import asyncio
-
+cache = {}
 async def imageopenGETBYTES(text):
     text = text.replace("\\","/")
     text = text.replace("//","/")
@@ -434,10 +434,15 @@ async def imageopenGETBYTES(text):
     if response.status == 200:
         return await response.bytes()
 async def imageopenWEB(text):
-    bytes_list = bytearray(await imageopenGETBYTES(text))
-    bytes = io.BytesIO(bytes_list) 
-    image = Image.open(bytes).convert("RGBA")
-    return image
+    global cache
+    if text in cache:
+        return cache[text]
+    else:
+        bytes_list = bytearray(await imageopenGETBYTES(text))
+        bytes = io.BytesIO(bytes_list) 
+        image = Image.open(bytes).convert("RGBA")
+        cache[text] = image
+        return image
 def put(canvas, image,a,b,alignment="00"):
     canvas.alpha_composite(image,(int(a)-( image.size[0] * int(alignment[0]) // 2 ),int(b)-( image.size[1] * int(alignment[1]) // 2) ) )
     return canvas
