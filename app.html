@@ -818,7 +818,7 @@ async def CreateUbuntuButton(text,style=0,predefinedsize=[]):
 
 async def Create95Button(text,style=0,underline=False):
     styles = ["95/Button.png","95/Button Default.png"]
-    Button = await imageopenWEB(styles[style])
+    Button = await imageopenWEB(styles[min(style,len(styles)-1])
     textgraphic = await createtextmac(text,"95//fonts//text//",underline=underline,underlineoffset=1)
     if style == 1:
         Button = resize(Button,max(75,w(textgraphic)+5+5),h(textgraphic)+6+4,3,3,3,3)
