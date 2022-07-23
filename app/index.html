@@ -427,7 +427,8 @@
     <input id="customicon" type="text" value="" placeholder="custom url here like https://i.imgur.com/cUoeEc0.png" style="width:500px">
     <div class="wrapper" style="width:128px;height:128px;margin-left:auto;margin-right:auto;">
         <div class="content">
-            <img id="customiconimg" src="">
+            <img id="customiconimg" src="" crossorigin="anonymous">
+            <canvas id="customiconcanvas"></canvas>
         </div>
         <div class="background">
             <input type="radio" id="customiconradio" name="icon" value="">
@@ -465,7 +466,7 @@
 </py-env>
 
 <py-script>
-from js import console, document, ImageData, Uint8ClampedArray, CanvasRenderingContext2D as Context2d, requestAnimationFrame
+from js import console, document, ImageData, Uint8ClampedArray, CanvasRenderingContext2D as Context2d, requestAnimationFrame, Image as jsImage
 #import generate
 from pyodide import to_js, create_proxy
 from pyodide.http import pyfetch
@@ -473,18 +474,33 @@ from numpy import *
 from PIL import Image, ImageFont, ImageDraw, ImageMath,ImageChops, ImageOps
 from math import ceil,floor
 import asyncio
+
 cache = {}
+def blobbytes(x):
+    print("the x")
+    print(x)
+    return x.arrayBuffer()
 async def imageopenGETBYTES(text):
     text = text.replace("\\","/")
     text = text.replace("//","/")
     text = text.replace("./","")
     if( not text.startswith("http") ):
         url = f"https://raw.githubusercontent.com/relt-1/WindowCreator/main/{text}"
+        response = await pyfetch(url)
+        if response.status == 200:
+            return await response.bytes()
     else:
-        url = text
-    response = await pyfetch(url)
-    if response.status == 200:
-        return await response.bytes()
+        canvas = document.getElementById("customiconcanvas")
+        img = document.getElementById("customiconimg")
+        canvas.width = img.width
+        canvas.height = img.height
+        context = canvas.getContext("2d")
+        context.drawImage(img,0,0,img.width,img.height,0,0,img.width,img.height)
+        imagedatas = context.getImageData(0,0,img.width,img.height)
+        imagepil = Image.frombytes("RGBA",(img.width,img.height),bytes(imagedatas.data))
+        finalbytes = io.BytesIO()
+        imagepil.save(finalbytes, format="PNG")
+        return finalbytes.getvalue()
 async def imageopenWEB(text):
     global cache
     if text in cache:
