@@ -9,7 +9,8 @@
         <meta content="https://github.com/relt-1/WindowCreator/raw/main/95/Critical%20Error.png" property="og:image" />
         <meta content="#FF0000" data-react-helmet="true" name="theme-color" />
         <meta name="description" content="Free and open-source online error message generator. Supports Windows XP, Windows 95, Windows 7 and more!" />
-	<meta name="google-site-verification" content="QR_SBSjEUmXu-LYnybwDFrW7cqzWaFGHMzt0Bqj5574" />
+        <meta name="google-site-verification" content="QR_SBSjEUmXu-LYnybwDFrW7cqzWaFGHMzt0Bqj5574" />
+        <meta name="viewport" content="width=700px, initial-scale=1">
 		<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
 		<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
         <style>
@@ -29,8 +30,16 @@
         background-color: rgba(55,58,64);
         border-radius: 5px;
         color: rgba(251,251,251);
-        margin-left:auto;
-        margin-right:auto;
+        margin-left:2px;
+        margin-right:2px;
+        height:40px;
+        text-align:center;
+        }
+        textarea{
+        text-align:left !important;
+        }
+        input[type="number"]{
+        width:60px;
         }
         ::placeholder{
         color: rgba(114,118,125);
@@ -61,11 +70,13 @@
             -webkit-appearance:none;
             background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAH0CAYAAAD11uftAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAADMSURBVGhD7ZGxDoMwDAXtMNL/n/upNW2XXIwE6tg79Ix0iU0Uct8fzwDj+57oZY4RzMjMYHpZHGVOZs1BTtqPwizz3jOrXDvn0vpJI9uZZY+VOUvrkRz1RaQWtipM294efqvtTETWr5pTC1swty6ktjPX29udrawLrcL0M+sXIP3MuoGFGrs+J+3rdd76ULfzx8N/3xNKoARKoARKoARKoARKoARKoARKoARKoARKoARKoARKoARKoARKoARKoARKoARKoARKoAR/ISNeM/kIGgP1tiYAAAAASUVORK5CYII=);
             border: 1px solid rgba(88,89,94) !important;
-            box-shadow: inset 0 0 3px 3px rgba(0,0,0,0.2);
+            box-shadow: inset 0 0 5px 5px rgba(0,0,0,0.2);
             color: gray;
-            border-radius: 5px;
-            width:15px;
-            height:15px;
+            border-radius: 3px;
+            width:40px;
+            height:40px;
+            margin-left:2px;
+            margin-right:2px;
         }
         input[type="checkbox"]:hover{
             background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAH0CAYAAAD11uftAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAADNSURBVGhD7ZFBDoMwDATtcKT/f10fU9P2komRQD12Bq2RJrGJQu774xlgfN8TvcwxghmZGUwvi6PMyaw5yEn7UZhl3ntmlWvnXFo/aWQ7s+yxMmdpPZKjvojUwlaFadvbw2+1nYnI+lVzamEL5taF1Hbmenu7s5V1oVWYfmb9AqSfWTewUGPX56R9vc5bH+p2/nj473tCCZRACZRACZRACZRACZRACZRACZRACZRACZRACZRACZRACZRACZRACZRACZRACZRACZTgL2TEC9CACFYClGVkAAAAAElFTkSuQmCC);
@@ -74,7 +85,7 @@
             background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAH0CAYAAAD11uftAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAC7SURBVGhD7ZBRCgIxDAXjXs0reCkv3RrYftjZFCn76Qy8LQw1r/HxfL1bgGOcE0fvPZi7N8c5ceT9YG7PLKhntvww9c1SjtkTi/bWgsn2lo1zdtrzw2zsviPzwUj9143CiXr3RVEhIzdjVmueb/v9zrKolJfqzGrN/AmymnnyPbWeOc4JJVACJVACJVACJVACJVACJVACJVACJVACJVACJVACJVACJVACJVACJVACJVACJVACJVCC/5URHxX0nEEyRcPgAAAAAElFTkSuQmCC);
             border: 1px solid rgba(230,230,230,0.6) !important;
             box-shadow: 0 0 3px 3px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.6);
-            border-radius: 5px;
+            border-radius: 3px;
         }
         input[type="radio"]{
             appearance:none;
@@ -144,15 +155,42 @@
             background: linear-gradient(0deg, transparent 10%, rgba(17,84,26) 100%);
             background-color: rgba(47,117,56);
         }
+        .buttons{
+            display:inline-flex;
+        }
+        .textframe, .separator, .smallseparator{
+            
+            border-top: 1px solid; 
+            background-color: transparent !important;
+            border-image: linear-gradient(to left, #0000 5px,#787878, #0000 calc(100% - 5px)) 1;
+        }
+        .textframe{
+            padding-top:8px;
+            padding-bottom:8px;
+            border-bottom: 1px solid;
+        }
+        .separator{
+            margin-top:16px;
+            margin-bottom:16px;
+        }
+        .smallseparator{
+            margin-left:auto;
+            margin-right:auto;
+            width:50%;
+            margin-top:6px;
+            margin-bottom:6px;
+        }
         </style>
 	</head>
 	<body>
+    <div class="separator"></div>
     <p>title:</p>
-    <input id="title" type="text" value="" placeholder="title here">
+    <input id="title" type="text" value="" placeholder="title here" style="text-align:left !important;">
     <p>text:</p>
 	<textarea id="text" value="" placeholder="main error text here" style="width: 30%; height: 200px;"></textarea>
     <p>second text:</p>
 	<textarea id="subtext" value="" placeholder="second error text here" style="width: 30%; height: 200px;"></textarea>
+    <div class="separator"></div>
     <p>icon: </p>
     <form>
     <table style="margin-left:auto;margin-right:auto;">
@@ -424,6 +462,7 @@
         </td>
     </tr>
     </table>
+    <div class="smallseparator"></div>
     <input id="customicon" type="text" value="" placeholder="custom url here like https://i.imgur.com/cUoeEc0.png" style="width:500px">
     <div class="wrapper" style="width:128px;height:128px;margin-left:auto;margin-right:auto;">
         <div class="content">
@@ -435,16 +474,30 @@
         </div>
     </div>
     </form>
+    <div class="separator"></div>
+    <p>Each button has 3 values: text, style, and secondary value</p>
+    <p>Style is a number which dictates the buttons look (the exact type of style is different for every os.)</p>
+    <p>The secondary value controls things that are independent of style, most os's dont use it except a few (mac, 3.1, and the 9x).</p>
+    <div class="smallseparator"></div>
     <p>button 1:</p>
+    <div class="buttons">
     <input id="button1" type="text" value="OK"> <input id="button1style" type="number" value="0" min="0" max="4"> <input id="button1default" type="checkbox">
+    </div>
     <p>button 2:</p>
+    <div class="buttons">
     <input id="button2" type="text" value=""> <input id="button2style" type="number" value="0" min="0" max="4"> <input id="button2default" type="checkbox">
+    </div>
     <p>button 3:</p>
+    <div class="buttons">
     <input id="button3" type="text" value=""> <input id="button3style" type="number" value="0" min="0" max="4"> <input id="button3default" type="checkbox">
+    </div>
+    <div class="separator"></div>
     <p>active: </p>
     <input id="active" type="checkbox" checked>
+    <div class="separator"></div>
     <p>secondary value (different behavior per os): </p>
     <input id="secondary" type="checkbox" checked>
+    <div class="separator"></div>
     <p>click the button only ONCE, and wait a while. the first generation takes a minute, but after that it should be faster</p>
     <button id="generate"> Generate! </button>
 	<canvas id="xpoutput"></canvas>
@@ -1878,3 +1931,4 @@ UpdateCustomIcon()
 	
 	</body>
 </html>
+
