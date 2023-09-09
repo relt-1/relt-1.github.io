@@ -514,11 +514,14 @@
     
     <br />
     <p>theme used from the amazing Skeuocord <a href="https://github.com/Marda33/SkeuoCord">https://github.com/Marda33/SkeuoCord (link)</a></p>
-<py-env>
-- numpy
-- Pillow
-
-</py-env>
+<py-config type="json">
+                    {
+                      "packages": [
+                        "numpy",
+                        "sympy"
+                      ]
+                    }
+                </py-config>
 
 <py-script>
 from js import console, document, ImageData, Uint8ClampedArray, CanvasRenderingContext2D as Context2d, requestAnimationFrame, Image as jsImage
