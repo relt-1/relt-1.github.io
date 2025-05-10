@@ -537,16 +537,9 @@
 		<br />
 		<br />
     <p>theme used from the amazing Skeuocord <a href="https://github.com/Marda33/SkeuoCord">https://github.com/Marda33/SkeuoCord (link)</a></p>
-<py-config type="json">
-                    {
-                      "packages": [
-                        "numpy",
-                        "Pillow"
-                      ]
-                    }
-                </py-config>
 
-<py-script>
+
+<script type="py" config='{ "packages": [ "numpy", "Pillow" ]}'>
 from js import console, document, ImageData, Uint8ClampedArray, CanvasRenderingContext2D as Context2d, requestAnimationFrame, Image as jsImage
 #import generate
 from pyodide.ffi import to_js, create_proxy
