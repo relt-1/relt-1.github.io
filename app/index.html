@@ -1613,7 +1613,7 @@ async def CreateUbuntuWindow(icon="",bigtext="",text="",title="",buttons=[],acti
     for button in buttons:
         ButtonImg = await CreateUbuntuButton(button[0],button[1])
         maxbuttonwidth = __builtins__.max(w(ButtonImg),maxbuttonwidth)
-        _.maxbuttonheight = __builtins__.max(h(ButtonImg),maxbuttonheight)
+        maxbuttonheight = __builtins__.max(h(ButtonImg),maxbuttonheight)
     contentwidth = __builtins__.max(contentwidth, (maxbuttonwidth+4+4)*len(buttons)+8+8)
     contentheight += maxbuttonheight
     CONTENT = Image.new("RGBA",(contentwidth,contentheight),(240,235,226))
