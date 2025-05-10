@@ -111,8 +111,8 @@
         }
         .wrapper{
             position:relative;
-            min-width:64px;
-            min-height:64px;
+            __builtins__.min-width:64px;
+            __builtins__.min-height:64px;
         }
         .background{
             position: absolute;
@@ -481,15 +481,15 @@
     <div class="smallseparator"></div>
     <p>button 1:</p>
     <div class="buttons">
-    <input id="button1" type="text" value="OK" alt="First button text"> <input id="button1style" type="number" value="0" min="0" max="4"> <input id="button1default" type="checkbox">
+    <input id="button1" type="text" value="OK" alt="First button text"> <input id="button1style" type="number" value="0" __builtins__.min="0" __builtins__.max="4"> <input id="button1default" type="checkbox">
     </div>
     <p>button 2:</p>
     <div class="buttons">
-    <input id="button2" type="text" value="" alt="Second button text"> <input id="button2style" type="number" value="0" min="0" max="4"> <input id="button2default" type="checkbox">
+    <input id="button2" type="text" value="" alt="Second button text"> <input id="button2style" type="number" value="0" __builtins__.min="0" __builtins__.max="4"> <input id="button2default" type="checkbox">
     </div>
     <p>button 3:</p>
     <div class="buttons">
-    <input id="button3" type="text" value="" alt="Third button text"> <input id="button3style" type="number" value="0" min="0" max="4"> <input id="button3default" type="checkbox">
+    <input id="button3" type="text" value="" alt="Third button text"> <input id="button3style" type="number" value="0" __builtins__.min="0" __builtins__.max="4"> <input id="button3default" type="checkbox">
     </div>
     <div class="separator"></div>
     <p>active: </p>
@@ -498,7 +498,7 @@
     <p>secondary value (different behavior per os): </p>
     <input id="secondary" type="checkbox" checked>
     <div class="separator"></div>
-    <p>click the button only ONCE, and wait a while. the first generation takes a minute, but after that it should be faster</p>
+    <p>click the button only ONCE, and wait a while. the first generation takes a __builtins__.minute, but after that it should be faster</p>
     <button id="generate" alt="Generate the fake error message"> Generate! </button>
 	<canvas id="xpoutput"></canvas>
     <canvas id="7output"></canvas>
@@ -548,7 +548,7 @@ from pyodide.ffi import to_js, create_proxy
 from pyodide.http import pyfetch
 from numpy import *
 from PIL import Image, ImageFont, ImageDraw, ImageMath,ImageChops, ImageOps
-from math import ceil,floor,max,min
+from math import ceil,floor
 import asyncio
 import io
 
@@ -644,8 +644,8 @@ async def createtext(text,fontdirectory,color=(255,255,255,255), buffersize=(100
             char = Image.merge("RGBA",(r,g,b,alpha2))
             drawntext.paste(char,(cursorpos,line))
             cursorpos +=w(char)+kerningadjust
-            width = max(width,cursorpos)
-            height = max(height,h(char))
+            width = __builtins__.max(width,cursorpos)
+            height = __builtins__.max(height,h(char))
         text = text[1:]
     for i in text:
         if(i=="\n"):
@@ -664,8 +664,8 @@ async def createtext(text,fontdirectory,color=(255,255,255,255), buffersize=(100
         char = Image.merge("RGBA",(r,g,b,alpha2))
         drawntext.paste(char,(cursorpos,line))
         cursorpos +=w(char)+kerningadjust
-        width = max(width,cursorpos)
-        height = max(height,h(char))
+        width = __builtins__.max(width,cursorpos)
+        height = __builtins__.max(height,h(char))
     return drawntext.crop((0,0,width,height))
 async def createtextmac(text,fontdirectory,color=(0,0,0,255), buffersize=(1000,1000),underline=False, underlineoffset=0,kerningadjust=0):
     drawntext = Image.new("RGBA",buffersize,(255,127,127,0))
@@ -687,8 +687,8 @@ async def createtextmac(text,fontdirectory,color=(0,0,0,255), buffersize=(1000,1
             char = ImageChops.multiply(char,colorimg)
             drawntext.paste(char,(cursorpos,line))
             cursorpos +=w(char)+kerningadjust
-            width = max(width,cursorpos)
-            height = max(height,h(char))
+            width = __builtins__.max(width,cursorpos)
+            height = __builtins__.max(height,h(char))
         text = text[1:]
     for i in text:
         if(i=="\n"):
@@ -701,8 +701,8 @@ async def createtextmac(text,fontdirectory,color=(0,0,0,255), buffersize=(1000,1
         char = ImageChops.multiply(char,colorimg)
         drawntext.paste(char,(cursorpos,line))
         cursorpos +=w(char)+kerningadjust
-        width = max(width,cursorpos)
-        height = max(height,h(char))
+        width = __builtins__.max(width,cursorpos)
+        height = __builtins__.max(height,h(char))
     return drawntext.crop((0,0,width,height))
 async def createtext7(im,x,y,text,fontdirectory,color=(0,0,0,255), buffersize=(1000,1000),align="00", kerningadjust=0, fit=9999999):
     drawntext = Image.new("RGBA",buffersize,(255,255,0,0))
@@ -730,8 +730,8 @@ async def createtext7(im,x,y,text,fontdirectory,color=(0,0,0,255), buffersize=(1
         drawntext.paste(char,(cursorpos,line))
         whitedrawntext.paste(whitechar,(cursorpos,line))
         cursorpos +=w(char)+kerningadjust
-        width = max(width,cursorpos)
-        height = max(height,h(char))
+        width = __builtins__.max(width,cursorpos)
+        height = __builtins__.max(height,h(char))
     drawntext = drawntext.crop((0,0,width,height))
     drawntext = put(Image.new("RGBA",(w(im),h(im)),(0,0,0,0)),drawntext,x,y,align)
     whitedrawntext = whitedrawntext.crop((0,0,width,height))
@@ -777,8 +777,8 @@ async def measuretext7(text,fontdirectory, buffersize=(1000,1000), kerningadjust
         #char = ImageChops.multiply(char,colorimg)
         #drawntext.paste(char,(cursorpos,line))
         cursorpos +=w(char)+kerningadjust
-        width = max(width,cursorpos)
-        height = max(height,h(char))
+        width = __builtins__.max(width,cursorpos)
+        height = __builtins__.max(height,h(char))
     return [width,height]
 
 async def createtextubuntu(im,x,y,text,fontdirectory,color=(0,0,0,255), buffersize=(1000,1000),align="00"):
@@ -799,8 +799,8 @@ async def createtextubuntu(im,x,y,text,fontdirectory,color=(0,0,0,255), buffersi
         #char = ImageChops.multiply(char,colorimg)
         drawntext.paste(char,(cursorpos,line))
         cursorpos +=w(char)
-        width = max(width,cursorpos)
-        height = max(height,h(char))
+        width = __builtins__.max(width,cursorpos)
+        height = __builtins__.max(height,h(char))
     drawntext = drawntext.crop((0,0,width,height))
     drawntext = put(Image.new("RGBA",(w(im),h(im)),(0,0,0,0)),drawntext,x,y,align)
     imgcolor = Image.new("RGBA",(w(im),h(im)),color)
@@ -860,64 +860,64 @@ def tile(im,width,height):    #this tiles an image
 
 async def CreateXPButton(text,style=0):
     styles = ["xp/Button.png","xp/Button Hovered.png","xp/Button Clicked.png","xp/Button Disabled.png","xp/Button Default.png"]
-    style = min(style,len(styles)-1)
+    style = __builtins__.min(style,len(styles)-1)
     Button = await imageopenWEB(styles[style])
     col = (0,0,0,255)
     if(style==3):
         col = (161,161,146,255)
     textgraphic = await createtext(text,".\\xp\\fonts\\text\\",col)
-    Button = resize(Button,max(w(textgraphic)+16,75),max(23,h(textgraphic)+10),8,8,9,9,Image.NEAREST)
+    Button = resize(Button,__builtins__.max(w(textgraphic)+16,75),__builtins__.max(23,h(textgraphic)+10),8,8,9,9,Image.NEAREST)
     Button = put(Button,textgraphic,w(Button)//2-w(textgraphic)//2,5)
     return Button
 
 async def CreateMacButton(text,style=0):
     styles = ["mac/Button.png","mac/Button Disabled.png"]
-    style = min(style,len(styles)-1)
+    style = __builtins__.min(style,len(styles)-1)
     Button = await imageopenWEB(styles[style])
     col = (0,0,0,255)
     if(style==1):
         col = (161,161,146,255)
         textgraphic = await createtextmac(text,".\\mac\\fonts\\caption\\",col)
-        Button = resize(Button,max(w(textgraphic)+10,60),max(20,h(textgraphic)+4),2,2,2,2,Image.NEAREST)
+        Button = resize(Button,__builtins__.max(w(textgraphic)+10,60),__builtins__.max(20,h(textgraphic)+4),2,2,2,2,Image.NEAREST)
     else:
         textgraphic = await createtextmac(text,".\\mac\\fonts\\caption\\",col)
-        Button = resize(Button,max(w(textgraphic)+10,60),max(20,h(textgraphic)+4),4,4,4,4,Image.NEAREST)
+        Button = resize(Button,__builtins__.max(w(textgraphic)+10,60),__builtins__.max(20,h(textgraphic)+4),4,4,4,4,Image.NEAREST)
     Button = put(Button,textgraphic,floor(w(Button)/2-w(textgraphic)/2),2)
     return Button
 
 async def Create7Button(text,style=0):
     styles = ["7/Button.png","7/Button.png","7/Button.png","7/Button Disabled.png","7/Button Defaulted.png","7/Button Defaulted Animation.png"]
-    Button = await imageopenWEB(styles[min(style,len(styles)-1)])
+    Button = await imageopenWEB(styles[__builtins__.min(style,len(styles)-1)])
     col = (0,0,0,255)
     #if(style==3):
     #    col = (161,161,146,255)
     #textgraphic = await createtext(text,".\\7\\fonts\\text\\",col)
     textsize = await measuretext7(text,"7\\fonts\\text\\",kerningadjust=-1)
-    Button = resize(Button,max(textsize[0]+16,86),max(24,textsize[1]+9),3,3,3,3,Image.NEAREST)
+    Button = resize(Button,__builtins__.max(textsize[0]+16,86),__builtins__.max(24,textsize[1]+9),3,3,3,3,Image.NEAREST)
     Button = await createtext7(Button,w(Button)//2-textsize[0]//2,4,text,"7\\fonts\\text\\",kerningadjust=-1)
     return Button
 
 async def Create7TaskDialogButton(text,style=0):
     styles = ["7/Button.png","7/Button.png","7/Button.png","7/Button Disabled.png","7/Button Defaulted.png","7/Button Defaulted Animation.png"]
-    Button = await imageopenWEB(styles[min(style,len(styles)-1)])
+    Button = await imageopenWEB(styles[__builtins__.min(style,len(styles)-1)])
     col = (0,0,0,255)
     #if(style==3):
     #    col = (161,161,146,255)
     #textgraphic = await createtext(text,".\\7\\fonts\\text\\",col)
     textsize = await measuretext7(text,"7\\fonts\\text\\",kerningadjust=-1)
-    Button = resize(Button,max(textsize[0]+30,66),max(21,textsize[1]+6),3,3,3,3,Image.NEAREST)
+    Button = resize(Button,__builtins__.max(textsize[0]+30,66),__builtins__.max(21,textsize[1]+6),3,3,3,3,Image.NEAREST)
     Button = await createtext7(Button,w(Button)//2-textsize[0]//2,3,text,"7\\fonts\\text\\",kerningadjust=-1)
     return Button
 
 async def Create3_1Button(text,style=0,underline=False):
     styles = ["3.1/Button.png","3.1/Button Default.png"]
-    style = min(style,len(styles)-1)
+    style = __builtins__.min(style,len(styles)-1)
     Button = await imageopenWEB(styles[style])
     textgraphic = await createtextmac(text,"3.1//fonts//text//",underline=underline)
     if style == 1:
-        Button = resize(Button,max(58,w(textgraphic)+5+5),h(textgraphic)+6+6,4,4,4,4)
+        Button = resize(Button,__builtins__.max(58,w(textgraphic)+5+5),h(textgraphic)+6+6,4,4,4,4)
         Border = await imageopenWEB("3.1//Button Text Outline.png")
-        BorderImg = tile(Border,max(58,w(textgraphic)+5+5),h(textgraphic)+6+6)
+        BorderImg = tile(Border,__builtins__.max(58,w(textgraphic)+5+5),h(textgraphic)+6+6)
         textx = floor(w(Button)/2-w(textgraphic)/2-1)
         textendx = textx+w(textgraphic)
         Button = put(Button,textgraphic,textx,6,"00")
@@ -926,37 +926,37 @@ async def Create3_1Button(text,style=0,underline=False):
         Button = put(Button,BorderImg.crop((textendx+1,   6,                   textendx+2,         7+h(textgraphic))),   textendx+1, 6)
         Button = put(Button,BorderImg.crop((textx-1,      5,                   textendx,           6)),                  textx-1,    5)
     else:
-        Button = resize(Button,max(58,w(textgraphic)+6+6),h(textgraphic)+6+6,3,3,3,3)
+        Button = resize(Button,__builtins__.max(58,w(textgraphic)+6+6),h(textgraphic)+6+6,3,3,3,3)
         Button = put(Button,textgraphic,floor(w(Button)/2-w(textgraphic)/2-1),6,"00")
     return Button
 
 async def CreateUbuntuButton(text,style=0,predefinedsize=[]):
     styles = ["ubuntu/Button.png","ubuntu/Button Default.png"]
-    Button = await imageopenWEB(styles[min(style,len(styles)-1)])
+    Button = await imageopenWEB(styles[__builtins__.min(style,len(styles)-1)])
     if predefinedsize:
         size = predefinedsize
     else:
         size = await measuretext7(text,"ubuntu/fonts/text/")
         size[0] += 16
         size[1] += 10
-        size[0] = max(85,size[0])
-        size[1] = max(29,size[1])
+        size[0] = __builtins__.max(85,size[0])
+        size[1] = __builtins__.max(29,size[1])
     Button = resize(Button,size[0],size[1],5,5,5,5,scalingmethod=Image.BICUBIC)
     Button = await createtextubuntu(Button, size[0]//2, size[1]//2, text, "ubuntu/fonts/text/",(60,59,55,255),align="11")
     return Button
 
 async def Create95Button(text,style=0,underline=False):
     styles = ["95/Button.png","95/Button Default.png"]
-    style = min(style,len(styles)-1)
+    style = __builtins__.min(style,len(styles)-1)
     Button = await imageopenWEB(styles[style])
     textgraphic = await createtextmac(text,"95//fonts//text//",underline=underline,underlineoffset=1)
     if style == 1:
-        Button = resize(Button,max(75,w(textgraphic)+5+5),h(textgraphic)+6+4,3,3,3,3)
+        Button = resize(Button,__builtins__.max(75,w(textgraphic)+5+5),h(textgraphic)+6+4,3,3,3,3)
         Border = await imageopenWEB("95//Button Text Outline.png")
-        BorderImg = tile(Border,max(75,w(textgraphic)+5+5),h(textgraphic)+6+4)
+        BorderImg = tile(Border,__builtins__.max(75,w(textgraphic)+5+5),h(textgraphic)+6+4)
         textx = floor(w(Button)/2-w(textgraphic)/2)
         outx = 4
-        outendx = max(75,w(textgraphic)+5+5)-4
+        outendx = __builtins__.max(75,w(textgraphic)+5+5)-4
         #BorderImg.show()
         Button = put(Button,textgraphic,textx,4)
         Button = put(Button,BorderImg.crop((outx,      4,                   outx+1,            6+h(textgraphic))),   outx,    4)
@@ -964,21 +964,21 @@ async def Create95Button(text,style=0,underline=False):
         Button = put(Button,BorderImg.crop((outendx-1,   4,                   outendx,         6+h(textgraphic))),   outendx-1, 4)
         Button = put(Button,BorderImg.crop((outx,      4,                   outendx,           5)),                  outx,    4)
     else:
-        Button = resize(Button,max(75,w(textgraphic)+5+5),h(textgraphic)+4+6,2,2,2,2)
+        Button = resize(Button,__builtins__.max(75,w(textgraphic)+5+5),h(textgraphic)+4+6,2,2,2,2)
         Button = put(Button,textgraphic,floor(w(Button)/2-w(textgraphic)/2),4)
     return Button
 async def Create2000Button(text,style=0,underline=False):
     styles = ["2000/Button.png","2000/Button Default.png"]
-    style = min(style,len(styles)-1)
+    style = __builtins__.min(style,len(styles)-1)
     Button = await imageopenWEB(styles[style])
     textgraphic = await createtext(text,"xp//fonts//text//",(0,0,0,255),underline=underline,underlineoffset=1)
     if style == 1:
-        Button = resize(Button,max(75,w(textgraphic)+5+5),h(textgraphic)+6+4,3,3,3,3)
+        Button = resize(Button,__builtins__.max(75,w(textgraphic)+5+5),h(textgraphic)+6+4,3,3,3,3)
         Border = await imageopenWEB("95//Button Text Outline.png")
-        BorderImg = tile(Border,max(75,w(textgraphic)+5+5),h(textgraphic)+6+4)
+        BorderImg = tile(Border,__builtins__.max(75,w(textgraphic)+5+5),h(textgraphic)+6+4)
         textx = floor(w(Button)/2-w(textgraphic)/2)
         outx = 4
-        outendx = max(75,w(textgraphic)+5+5)-4
+        outendx = __builtins__.max(75,w(textgraphic)+5+5)-4
         #BorderImg.show()
         Button = put(Button,textgraphic,textx,4)
         Button = put(Button,BorderImg.crop((outx,      4,                   outx+1,            6+h(textgraphic))),   outx,    4)
@@ -986,7 +986,7 @@ async def Create2000Button(text,style=0,underline=False):
         Button = put(Button,BorderImg.crop((outendx-1,   4,                   outendx,         6+h(textgraphic))),   outendx-1, 4)
         Button = put(Button,BorderImg.crop((outx,      4,                   outendx,           5)),                  outx,    4)
     else:
-        Button = resize(Button,max(75,w(textgraphic)+5+5),h(textgraphic)+4+6,2,2,2,2)
+        Button = resize(Button,__builtins__.max(75,w(textgraphic)+5+5),h(textgraphic)+4+6,2,2,2,2)
         Button = put(Button,textgraphic,floor(w(Button)/2-w(textgraphic)/2),4)
     return Button
 async def CreateXPWindow(width,height,captiontext="",active=True,insideimagepath = "",erroriconpath="",errortext="",button1="",button2="",button3="",button1style=0,button2style=0,button3style=0):
@@ -1011,21 +1011,21 @@ async def CreateXPWindow(width,height,captiontext="",active=True,insideimagepath
     textposy = 11+h(TopFrame)
     
     captiontextwidth = w(await createtext(captiontext,".\\xp\\fonts\\caption\\"))
-    width = max(width,captiontextwidth+43)
+    width = __builtins__.max(width,captiontextwidth+43)
     createdtext = await createtext(errortext,".\\xp\\fonts\\text\\",(0,0,0,255))
-    #textposy -= min(15,h(createdtext)//2)
-    width = max(width,w(createdtext)+textposx+8+3)
-    height = max(height,h(createdtext)+h(TopFrame)+3+25)
+    #textposy -= __builtins__.min(15,h(createdtext)//2)
+    width = __builtins__.max(width,w(createdtext)+textposx+8+3)
+    height = __builtins__.max(height,h(createdtext)+h(TopFrame)+3+25)
     print(textposy)
     if(insideimagepath != ""):
         insideimage = await imageopenWEB(insideimagepath)
-        height = max(h(insideimage)+h(TopFrame)+3,height)
-        width = max(width,w(insideimage)+6)
+        height = __builtins__.max(h(insideimage)+h(TopFrame)+3,height)
+        width = __builtins__.max(width,w(insideimage)+6)
     if(erroriconpath != ""):
         erroricon = await imageopenWEB(erroriconpath)
         textposx += 15+w(erroricon)
-        textposy = max(textposy,11+floor(h(erroricon)/2-h(createdtext)/2)+h(TopFrame))
-        height = max(height,h(erroricon)+h(TopFrame)+3+11+11+3)
+        textposy = __builtins__.max(textposy,11+floor(h(erroricon)/2-h(createdtext)/2)+h(TopFrame))
+        height = __builtins__.max(height,h(erroricon)+h(TopFrame)+3+11+11+3)
         width += 14+w(erroricon)
         
     buttonsimage = Image.new("RGBA",(0,0),(0,0,0,0))
@@ -1036,7 +1036,7 @@ async def CreateXPWindow(width,height,captiontext="",active=True,insideimagepath
         
         button1img = await CreateXPButton(button1,button1style)
         #IMAGE = put(IMAGE,button1img,3+12,height-3-12,"02")
-        buttonsheight = max(buttonsheight,h(button1img)+14)
+        buttonsheight = __builtins__.max(buttonsheight,h(button1img)+14)
         temp = Image.new("RGBA",(buttonswidth+w(button1img),buttonsheight),(0,0,0,0))
         temp = put(temp,buttonsimage,0,0)
         temp = put(temp,button1img,buttonswidth,3)
@@ -1046,7 +1046,7 @@ async def CreateXPWindow(width,height,captiontext="",active=True,insideimagepath
             buttonswidth += 6
             button2img = await CreateXPButton(button2,button2style)
             #IMAGE = put(IMAGE,button2img,3+12,height-3-12,"02")
-            buttonsheight = max(buttonsheight,h(button2img)+14)
+            buttonsheight = __builtins__.max(buttonsheight,h(button2img)+14)
             temp = Image.new("RGBA",(buttonswidth+w(button2img),buttonsheight),(0,0,0,0))
             temp = put(temp,buttonsimage,0,0)
             temp = put(temp,button2img,buttonswidth,3)
@@ -1056,17 +1056,17 @@ async def CreateXPWindow(width,height,captiontext="",active=True,insideimagepath
                 buttonswidth += 6
                 button3img = await CreateXPButton(button3,button3style)
                 #IMAGE = put(IMAGE,button2img,3+12,height-3-12,"02")
-                buttonsheight = max(buttonsheight,h(button3img)+14)
+                buttonsheight = __builtins__.max(buttonsheight,h(button3img)+14)
                 temp = Image.new("RGBA",(buttonswidth+w(button3img),buttonsheight),(0,0,0,0))
                 temp = put(temp,buttonsimage,0,0)
                 temp = put(temp,button3img,buttonswidth,3)
                 buttonsimage = temp.copy()
                 buttonswidth += w(button3img)
-        width = max(width,buttonswidth+12)
+        width = __builtins__.max(width,buttonswidth+12)
         height += buttonsheight
     #buttonswidth.show()
     
-    width = max(66,width)
+    width = __builtins__.max(66,width)
     IMAGE = Image.new("RGBA", (width,height), (236,233,216,0))
     #IMAGE = put(IMAGE,cropx(TopFrame,0,27),0,0,"00")
     #IMAGE = put(IMAGE,cropx(TopFrame,28,31).resize((width-w(TopFrame)+4,h(TopFrame)),Image.NEAREST),27,0,"00")
@@ -1108,18 +1108,18 @@ async def CreateMacAlertDialog(width,height,title="",bar=True,icon="",errortext=
         Barheight = 0
     if(errortext != ""):
         ErrorTextImg = await createtextmac(errortext,"mac//fonts//caption//")
-        width = max(width,w(ErrorTextImg)+79+90)
-        #height = max(height,h(ErrorTextImg)+Paddingheight+20)
+        width = __builtins__.max(width,w(ErrorTextImg)+79+90)
+        #height = __builtins__.max(height,h(ErrorTextImg)+Paddingheight+20)
         TextHeight += h(ErrorTextImg)
     if(subtext != ""):
         SubTextImg = await createtextmac(subtext,"mac//fonts//text//")
         SubTextPos = TextHeight
-        width = max(width,w(SubTextImg)+79+90)
+        width = __builtins__.max(width,w(SubTextImg)+79+90)
         TextHeight += h(SubTextImg)
     height += TextHeight + Paddingheight
     if(icon != ""):
         IconImg = await imageopenWEB(icon)
-        height = max(height,h(IconImg)+Paddingheight)
+        height = __builtins__.max(height,h(IconImg)+Paddingheight)
         width += w(IconImg)
         IconPadding = w(IconImg)
     buttonswidth = 0
@@ -1133,7 +1133,7 @@ async def CreateMacAlertDialog(width,height,title="",bar=True,icon="",errortext=
             if(button3 != ""):
                 button3img = await CreateMacButton(button3,button3style)
                 buttonswidth += w(button3img)
-    width = max(width,buttonswidth+79+90)
+    width = __builtins__.max(width,buttonswidth+79+90)
     IMAGE = Image.new("RGBA", (width,height), (236,233,216,0))
     if(bar):
         IMAGE = put(IMAGE,resize(WindowBar,width,height,3,4,24,4),0,0)
@@ -1185,12 +1185,12 @@ async def CreateMacWindow(width,height,title="",icon="",errortext="",button1="",
         iconsize = w(IconImg)+26
     if(errortext != ""):
         ErrorTextImg = await createtextmac(errortext,"mac//fonts//caption//")
-        width = max(width,w(ErrorTextImg)+iconsize+20+20+100)
-        #height = max(height,h(ErrorTextImg)+Paddingheight+20)
+        width = __builtins__.max(width,w(ErrorTextImg)+iconsize+20+20+100)
+        #height = __builtins__.max(height,h(ErrorTextImg)+Paddingheight+20)
         TextHeight += h(ErrorTextImg)+36
     #if(subtext != ""):
     #    SubTextImg = await createtextmac(subtext,"mac//fonts//text//")
-    #    width = max(width,w(SubTextImg)+79+90)
+    #    width = __builtins__.max(width,w(SubTextImg)+79+90)
     #    TextHeight += h(SubTextImg)
     height += TextHeight+24+4
     if(button1 != ""):
@@ -1239,7 +1239,7 @@ async def CreateMacWindoid(icon="",text="",collapsed=False):
     if(icon != ""):
         IconImg = await imageopenWEB(icon)
         contentwidth += w(IconImg) + 7
-        contentheight = max(contentheight,h(IconImg))
+        contentheight = __builtins__.max(contentheight,h(IconImg))
         textpos += w(IconImg) + 7
     contentwidth += 12
     contentheight += 8
@@ -1270,7 +1270,7 @@ async def CreateMacWindoid(icon="",text="",collapsed=False):
     return IMAGE
 
 async def mix(a,b,c):     #smoothly mixes between two values.
-    c = min(1,max(0,c))
+    c = __builtins__.min(1,__builtins__.max(0,c))
     c = c**0.5
     return a*(1-c)+b*c
 
@@ -1303,29 +1303,29 @@ async def Create7Window(icon="",text="",title="",pos=(0,0),screenres=(1920,1080)
     print("1")
     if(text != ""):
         TextDim = await measuretext7(text,"7//fonts//text//",kerningadjust=-1)
-        contentwidth = max(contentwidth,TextDim[0]+38+12)
+        contentwidth = __builtins__.max(contentwidth,TextDim[0]+38+12)
         contentheight += TextDim[1]
-        textposy = textposy-min(TextDim[1],21)
+        textposy = textposy-__builtins__.min(TextDim[1],21)
     if(icon != ""):
         IconImg = await imageopenWEB(icon)
-        contentwidth = max(contentwidth,w(IconImg)+25+25)
-        contentheight = max(contentheight,h(IconImg)+26+26)
+        contentwidth = __builtins__.max(contentwidth,w(IconImg)+25+25)
+        contentheight = __builtins__.max(contentheight,h(IconImg)+26+26)
         textpos += w(IconImg)-4+25
         textposy += h(IconImg)//2-7
         if(text != ""):
-            contentwidth = max(contentwidth,w(IconImg)+25+TextDim[0]+38+9)
+            contentwidth = __builtins__.max(contentwidth,w(IconImg)+25+TextDim[0]+38+9)
     print("2")
     if(title != ""):
         TitleDim = await measuretext7(title,"7//fonts//text//",kerningadjust=-1)
-        contentwidth = max(contentwidth,TitleDim[0]+49)
+        contentwidth = __builtins__.max(contentwidth,TitleDim[0]+49)
     buttonswidth = 0
     #len(buttons)*95
     for i in buttons:
         tempbuttontextsize = await measuretext7(i[0],"7\\fonts\\text\\",kerningadjust=-1)
-        buttonswidth += max(tempbuttontextsize[0]+16,86) + 10
+        buttonswidth += __builtins__.max(tempbuttontextsize[0]+16,86) + 10
     if(buttons):
         contentheight += 49
-        contentwidth = max(contentwidth,buttonswidth+43)
+        contentwidth = __builtins__.max(contentwidth,buttonswidth+43)
     print("3")
     CONTENT = Image.new("RGBA",(contentwidth,contentheight),(255,255,255))
     if(icon != ""):
@@ -1405,8 +1405,8 @@ async def Create7ButtonPanel(buttons,windowwidth=360,screenres=(1920,1080)):
             curwidth = 0
             curlevel = 0
         curwidth += size[0]
-        summedwidth= max(summedwidth,curwidth)
-        curlevel = max(curlevel,size[1])
+        summedwidth= __builtins__.max(summedwidth,curwidth)
+        curlevel = __builtins__.max(curlevel,size[1])
     summedheight += curlevel
     
     for button in cachedbuttons:
@@ -1425,9 +1425,9 @@ async def Create7TaskDialog(icon="",textbig="",textsmall="",title="",buttons=[],
     textbigheight = 0
     if(textbig != ""):
         textbigheight = (await measuretext7(textbig,"7/fonts/bigtext/",fit=width-iconsize-10-10))[1]+10
-        height = max(height,textbigheight+10+30)
+        height = __builtins__.max(height,textbigheight+10+30)
     if(textsmall != ""):
-        height = max(height,(await measuretext7(textsmall,"7/fonts/text/",fit=width-iconsize-10-10))[1]+15+15)
+        height = __builtins__.max(height,(await measuretext7(textsmall,"7/fonts/text/",fit=width-iconsize-10-10))[1]+15+15)
     if buttons:
         height += 41
     CONTENT = Image.new("RGBA",(width,height),(255,255,255,255))
@@ -1496,7 +1496,7 @@ async def Create7TaskDialog(icon="",textbig="",textsmall="",title="",buttons=[],
 
 def Export7Animation(img,savepath):  #just put the generated window into img and set savepath to the folder you want it to save  "7//animoutput//" is recommended
     for i in range(16):
-        ImageChops.multiply(ImageOps.deform(img, Windows7Anim(i/60)),Image.new("RGBA",(w(img),h(img)),(255,255,255,int(max(0,min(1,(i+0.1)/15))**0.5*255)))).save(savepath+str(i)+".png")
+        ImageChops.multiply(ImageOps.deform(img, Windows7Anim(i/60)),Image.new("RGBA",(w(img),h(img)),(255,255,255,int(__builtins__.max(0,__builtins__.min(1,(i+0.1)/15))**0.5*255)))).save(savepath+str(i)+".png")
 def even(a):
     c = ceil(a/2)*2
     dc = abs(c-a)
@@ -1534,20 +1534,20 @@ async def Create3_1Window(icon="",text="",title="",buttons=[],active=True):
         IconImg = await imageopenWEB(icon)
         textpos += w(IconImg)+19
         contentwidth += w(IconImg)+18
-        contentwidth = max(contentwidth,w(IconImg)+19+19)
-        contentheight = max(contentheight,17+h(IconImg)+15)
+        contentwidth = __builtins__.max(contentwidth,w(IconImg)+19+19)
+        contentheight = __builtins__.max(contentheight,17+h(IconImg)+15)
         if(text != ""):
-            textposy = max(16,h(IconImg)//2-h(TextImg)//2+17)
+            textposy = __builtins__.max(16,h(IconImg)//2-h(TextImg)//2+17)
     if(title != ""):
         TitleImg = await createtextmac(text,"3.1//fonts//text//")
-        contentwidth = max(contentwidth,w(TitleImg)+20+1)
+        contentwidth = __builtins__.max(contentwidth,w(TitleImg)+20+1)
     if buttons:
         contentheight += 44
     buttonswidth = 0
     for button in buttons:
         CurrentButton = await Create3_1Button(button[0],button[1],getsafe(button,2,False))
         buttonswidth += w(CurrentButton)+17
-    contentwidth = max(contentwidth,buttonswidth+17)
+    contentwidth = __builtins__.max(contentwidth,buttonswidth+17)
     contentwidth = even(contentwidth)
     if active:
         Window = await imageopenWEB("3.1//Window.png")
@@ -1598,24 +1598,24 @@ async def CreateUbuntuWindow(icon="",bigtext="",text="",title="",buttons=[],acti
         textheight += bigtextsize[1]+12
     if(text != ""):
         textsize = await measuretext7(text,"ubuntu/fonts/text/")
-        textwidth = max(textwidth,textsize[0])
+        textwidth = __builtins__.max(textwidth,textsize[0])
         textheight += textsize[1]
     else:
         textheight += 17
     contentwidth += textwidth
-    contentheight = max(contentheight,textheight+12+24+16)
+    contentheight = __builtins__.max(contentheight,textheight+12+24+16)
     if(icon != ""):
         IconImg = await imageopenWEB(icon)
         contentwidth += w(IconImg)
-        contentheight = max(contentheight,h(IconImg)+12+24+16)
-    maxbuttonwidth = 0
-    maxbuttonheight = 0
+        contentheight = __builtins__.max(contentheight,h(IconImg)+12+24+16)
+    __builtins__.maxbuttonwidth = 0
+    __builtins__.maxbuttonheight = 0
     for button in buttons:
         ButtonImg = await CreateUbuntuButton(button[0],button[1])
-        maxbuttonwidth = max(w(ButtonImg),maxbuttonwidth)
-        maxbuttonheight = max(h(ButtonImg),maxbuttonheight)
-    contentwidth = max(contentwidth, (maxbuttonwidth+4+4)*len(buttons)+8+8)
-    contentheight += maxbuttonheight
+        __builtins__.maxbuttonwidth = __builtins__.max(w(ButtonImg),__builtins__.maxbuttonwidth)
+        __builtins__.maxbuttonheight = __builtins__.max(h(ButtonImg),__builtins__.maxbuttonheight)
+    contentwidth = __builtins__.max(contentwidth, (__builtins__.maxbuttonwidth+4+4)*len(buttons)+8+8)
+    contentheight += __builtins__.maxbuttonheight
     CONTENT = Image.new("RGBA",(contentwidth,contentheight),(240,235,226))
     iconsize = 0
     if(icon != ""):
@@ -1630,8 +1630,8 @@ async def CreateUbuntuWindow(icon="",bigtext="",text="",title="",buttons=[],acti
             CONTENT = await createtextubuntu(CONTENT,iconsize+24,bigtextsize[1]+12+12,text,"ubuntu/fonts/text/",(60,59,55,255))
     buttonpos = contentwidth-12
     for button in buttons:
-        CONTENT = put(CONTENT, await CreateUbuntuButton(button[0],active and button[1] or 0,[maxbuttonwidth,maxbuttonheight]),buttonpos,contentheight-16,"22")
-        buttonpos -= maxbuttonwidth+8
+        CONTENT = put(CONTENT, await CreateUbuntuButton(button[0],active and button[1] or 0,[__builtins__.maxbuttonwidth,__builtins__.maxbuttonheight]),buttonpos,contentheight-16,"22")
+        buttonpos -= __builtins__.maxbuttonwidth+8
     
     Frame = await imageopenWEB(active and "ubuntu/Window.png" or (not active and "ubuntu/Window Inactive.png"))
     CloseButton = await imageopenWEB(active and "ubuntu/Close Button.png" or (not active and "ubuntu/Close Button Inactive.png"))
@@ -1663,28 +1663,28 @@ async def Create95Window(icon="",text="",title="",buttons=[],active=True,closebu
     if(icon):
         IconImg = await imageopenWEB(icon)
         width += w(IconImg)+12+12
-        height = max(height,h(IconImg)+12+6)
+        height = __builtins__.max(height,h(IconImg)+12+6)
         textshift += w(IconImg)+10
         iconheight = h(IconImg)
     if(text):
         TextImg = await createtextmac(text,"95/fonts/text/")
         print(w(TextImg))
         print(w(TextImg)+textshift+18+12)
-        width = max(width,w(TextImg)+textshift+18+11)
-        height = max(height,h(TextImg)+12+6)
+        width = __builtins__.max(width,w(TextImg)+textshift+18+11)
+        height = __builtins__.max(height,h(TextImg)+12+6)
     print(buttons)
     if(buttons):
         button = buttons[0]
         ButtonsImg = Image.new("RGBA",(1,1),(0,0,0,0))
         ButtonImg = await Create95Button(button[0],getsafe(button,1,0) if active else 0,getsafe(button,2,False))
-        ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg),max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
+        ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg),__builtins__.max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
         ButtonsImg = put(ButtonsImg,ButtonImg,w(ButtonsImg),0,"20")
         buttons.pop(0)
         for button in buttons:
             ButtonImg = await Create95Button(button[0],getsafe(button,1,0) if active else 0,getsafe(button,2,False))
-            ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg)+6,max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
+            ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg)+6,__builtins__.max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
             ButtonsImg = put(ButtonsImg,ButtonImg,w(ButtonsImg),0,"20")
-        width = max(width,w(ButtonsImg)+12+12)
+        width = __builtins__.max(width,w(ButtonsImg)+12+12)
         height += h(ButtonsImg)+12+11
         buttons.append("good")
     #width = 262
@@ -1724,28 +1724,28 @@ async def Create98Window(icon="",text="",title="",buttons=[],active=True,closebu
     if(icon):
         IconImg = await imageopenWEB(icon)
         width += w(IconImg)+12+12
-        height = max(height,h(IconImg)+12+6)
+        height = __builtins__.max(height,h(IconImg)+12+6)
         textshift += w(IconImg)+10
         iconheight = h(IconImg)
     if(text):
         TextImg = await createtextmac(text,"95/fonts/text/")
         print(w(TextImg))
         print(w(TextImg)+textshift+18+12)
-        width = max(width,w(TextImg)+textshift+18+11)
-        height = max(height,h(TextImg)+12+6)
+        width = __builtins__.max(width,w(TextImg)+textshift+18+11)
+        height = __builtins__.max(height,h(TextImg)+12+6)
     print(buttons)
     if(buttons):
         button = buttons[0]
         ButtonsImg = Image.new("RGBA",(1,1),(0,0,0,0))
         ButtonImg = await Create95Button(button[0],getsafe(button,1,0) if active else 0,getsafe(button,2,False))
-        ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg),max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
+        ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg),__builtins__.max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
         ButtonsImg = put(ButtonsImg,ButtonImg,w(ButtonsImg),0,"20")
         buttons.pop(0)
         for button in buttons:
             ButtonImg = await Create95Button(button[0],getsafe(button,1,0) if active else 0,getsafe(button,2,False))
-            ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg)+6,max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
+            ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg)+6,__builtins__.max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
             ButtonsImg = put(ButtonsImg,ButtonImg,w(ButtonsImg),0,"20")
-        width = max(width,w(ButtonsImg)+12+12)
+        width = __builtins__.max(width,w(ButtonsImg)+12+12)
         height += h(ButtonsImg)+12+11
         buttons.append("good")
     #width = 262
@@ -1791,28 +1791,28 @@ async def Create2000Window(icon="",text="",title="",buttons=[],active=True,close
     if(icon):
         IconImg = await imageopenWEB(icon)
         width += w(IconImg)+12+12
-        height = max(height,h(IconImg)+12+6)
+        height = __builtins__.max(height,h(IconImg)+12+6)
         textshift += w(IconImg)+10
         iconheight = h(IconImg)
     if(text):
         TextImg = await createtext(text,"xp/fonts/text/",(0,0,0,255))
         print(w(TextImg))
         print(w(TextImg)+textshift+18+12)
-        width = max(width,w(TextImg)+textshift+18+11)
-        height = max(height,h(TextImg)+12+6)
+        width = __builtins__.max(width,w(TextImg)+textshift+18+11)
+        height = __builtins__.max(height,h(TextImg)+12+6)
     print(buttons)
     if(buttons):
         button = buttons[0]
         ButtonsImg = Image.new("RGBA",(1,1),(0,0,0,0))
         ButtonImg = await Create2000Button(button[0],getsafe(button,1,0) if active else 0,getsafe(button,2,False))
-        ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg),max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
+        ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg),__builtins__.max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
         ButtonsImg = put(ButtonsImg,ButtonImg,w(ButtonsImg),0,"20")
         buttons.pop(0)
         for button in buttons:
             ButtonImg = await Create2000Button(button[0],getsafe(button,1,0) if active else 0,getsafe(button,2,False))
-            ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg)+6,max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
+            ButtonsImg = put(Image.new("RGBA",(w(ButtonsImg)+w(ButtonImg)+6,__builtins__.max(h(ButtonsImg),h(ButtonImg))),(0,0,0,0)),ButtonsImg,0,0)
             ButtonsImg = put(ButtonsImg,ButtonImg,w(ButtonsImg),0,"20")
-        width = max(width,w(ButtonsImg)+12+12)
+        width = __builtins__.max(width,w(ButtonsImg)+12+12)
         height += h(ButtonsImg)+12+11
         buttons.append("good")
     #width = 262
