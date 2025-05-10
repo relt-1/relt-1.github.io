@@ -111,8 +111,8 @@
         }
         .wrapper{
             position:relative;
-            __builtins__.min-width:64px;
-            __builtins__.min-height:64px;
+            min-width:64px;
+            min-height:64px;
         }
         .background{
             position: absolute;
@@ -481,15 +481,15 @@
     <div class="smallseparator"></div>
     <p>button 1:</p>
     <div class="buttons">
-    <input id="button1" type="text" value="OK" alt="First button text"> <input id="button1style" type="number" value="0" __builtins__.min="0" __builtins__.max="4"> <input id="button1default" type="checkbox">
+    <input id="button1" type="text" value="OK" alt="First button text"> <input id="button1style" type="number" value="0" min="0" max="4"> <input id="button1default" type="checkbox">
     </div>
     <p>button 2:</p>
     <div class="buttons">
-    <input id="button2" type="text" value="" alt="Second button text"> <input id="button2style" type="number" value="0" __builtins__.min="0" __builtins__.max="4"> <input id="button2default" type="checkbox">
+    <input id="button2" type="text" value="" alt="Second button text"> <input id="button2style" type="number" value="0" min="0" max="4"> <input id="button2default" type="checkbox">
     </div>
     <p>button 3:</p>
     <div class="buttons">
-    <input id="button3" type="text" value="" alt="Third button text"> <input id="button3style" type="number" value="0" __builtins__.min="0" __builtins__.max="4"> <input id="button3default" type="checkbox">
+    <input id="button3" type="text" value="" alt="Third button text"> <input id="button3style" type="number" value="0" min="0" max="4"> <input id="button3default" type="checkbox">
     </div>
     <div class="separator"></div>
     <p>active: </p>
@@ -498,7 +498,7 @@
     <p>secondary value (different behavior per os): </p>
     <input id="secondary" type="checkbox" checked>
     <div class="separator"></div>
-    <p>click the button only ONCE, and wait a while. the first generation takes a __builtins__.minute, but after that it should be faster</p>
+    <p>click the button only ONCE, and wait a while. the first generation takes a minute, but after that it should be faster</p>
     <button id="generate" alt="Generate the fake error message"> Generate! </button>
 	<canvas id="xpoutput"></canvas>
     <canvas id="7output"></canvas>
@@ -1608,14 +1608,14 @@ async def CreateUbuntuWindow(icon="",bigtext="",text="",title="",buttons=[],acti
         IconImg = await imageopenWEB(icon)
         contentwidth += w(IconImg)
         contentheight = __builtins__.max(contentheight,h(IconImg)+12+24+16)
-    __builtins__.maxbuttonwidth = 0
-    __builtins__.maxbuttonheight = 0
+    maxbuttonwidth = 0
+    maxbuttonheight = 0
     for button in buttons:
         ButtonImg = await CreateUbuntuButton(button[0],button[1])
-        __builtins__.maxbuttonwidth = __builtins__.max(w(ButtonImg),__builtins__.maxbuttonwidth)
-        __builtins__.maxbuttonheight = __builtins__.max(h(ButtonImg),__builtins__.maxbuttonheight)
-    contentwidth = __builtins__.max(contentwidth, (__builtins__.maxbuttonwidth+4+4)*len(buttons)+8+8)
-    contentheight += __builtins__.maxbuttonheight
+        maxbuttonwidth = __builtins__.max(w(ButtonImg),maxbuttonwidth)
+        _.maxbuttonheight = __builtins__.max(h(ButtonImg),maxbuttonheight)
+    contentwidth = __builtins__.max(contentwidth, (maxbuttonwidth+4+4)*len(buttons)+8+8)
+    contentheight += maxbuttonheight
     CONTENT = Image.new("RGBA",(contentwidth,contentheight),(240,235,226))
     iconsize = 0
     if(icon != ""):
@@ -1630,8 +1630,8 @@ async def CreateUbuntuWindow(icon="",bigtext="",text="",title="",buttons=[],acti
             CONTENT = await createtextubuntu(CONTENT,iconsize+24,bigtextsize[1]+12+12,text,"ubuntu/fonts/text/",(60,59,55,255))
     buttonpos = contentwidth-12
     for button in buttons:
-        CONTENT = put(CONTENT, await CreateUbuntuButton(button[0],active and button[1] or 0,[__builtins__.maxbuttonwidth,__builtins__.maxbuttonheight]),buttonpos,contentheight-16,"22")
-        buttonpos -= __builtins__.maxbuttonwidth+8
+        CONTENT = put(CONTENT, await CreateUbuntuButton(button[0],active and button[1] or 0,[maxbuttonwidth,maxbuttonheight]),buttonpos,contentheight-16,"22")
+        buttonpos -= maxbuttonwidth+8
     
     Frame = await imageopenWEB(active and "ubuntu/Window.png" or (not active and "ubuntu/Window Inactive.png"))
     CloseButton = await imageopenWEB(active and "ubuntu/Close Button.png" or (not active and "ubuntu/Close Button Inactive.png"))
